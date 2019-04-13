@@ -13,9 +13,9 @@ install:
 
 before_script:
   - cd ../
-  - ansible-galaxy install -r requirements.yml
   - mv ansible-role-$ROLE_NAME alvarobacelar.$ROLE_NAME
   - cd alvarobacelar.$ROLE_NAME
+  - ansible-galaxy install -r requirements.yml
 
 script:
   - molecule test
