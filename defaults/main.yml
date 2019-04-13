@@ -1,0 +1,16 @@
+---
+
+# vars padroes zookeeper
+path_zoo: /etc/zookeeper
+user_zoo: zoouser
+version_zoo: 3.4.14
+init_limit_zoo: 5
+sync_limit_zoo: 2
+client_port_zoo: 2181
+data_dir_zoo: /var/lib/zookeeper
+log_dir_zoo: /var/log/zookeeper
+
+path_kafka: /etc/kafka
+
+# links para download kafka e zookeeper
+_zookeeper_link: http://ftp.unicamp.br/pub/apache/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz

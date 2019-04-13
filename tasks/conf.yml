@@ -1,0 +1,19 @@
+---
+
+- name: criando o usuário zoouser
+  user:
+    name: "{{ user_zoo }}"
+    shell: /sbin/nologin
+    comment: "Zookeeper user"
+  become: true
+
+- name: garantindo que os diretorios do zookeeper estejam todos criados
+  file:
+    path: "{{ item }}"
+    owner: "{{ user_zoo }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ data_dir_zoo }}"
+    - "{{ log_dir_zoo }}"
+  become: true

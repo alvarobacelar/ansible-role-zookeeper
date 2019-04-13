@@ -1,0 +1,18 @@
+[Unit]
+Description=Apache Zookeeper Server (Kafka)
+Documentation=http://zookeeper.apache.org
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=forking
+User={{ user_zoo }}
+Restart=on-failure
+Environment=ZOO_LOG_DIR={{ log_dir_zoo }}
+ExecStart={{ path_zoo }}/bin/zkServer.sh start {{ path_zoo }}/conf/zoo.cfg
+ExecStop={{ path_zoo }}/bin/zkServer.sh stop {{ path_zoo }}/conf/zoo.cfg
+ExecReload={{ path_zoo }}/bin/zkServer.sh restart {{ path_zoo }}/conf/zoo.cfg
+WorkingDirectory={{ path_zoo }}
+
+[Install]
+WantedBy=multi-user.target

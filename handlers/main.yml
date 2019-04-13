@@ -1,0 +1,8 @@
+---
+
+- name: inicia zookeeper
+  systemd:
+    name: zookeeper
+    state: started
+    daemon_reload: true
+  become: true

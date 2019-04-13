@@ -1,0 +1,32 @@
+---
+
+- name: baixando o zookeper no servidor
+  unarchive:
+    src: "{{ _zookeeper_link }}"
+    dest: "/opt/"
+    owner: "{{ user_zoo }}"
+    remote_src: true
+  become: true
+
+- name: criando um link simbolico no path {{ path_zoo }}
+  file:
+    src: "/opt/zookeeper-{{ version_zoo }}"
+    dest: "{{ path_zoo }}"
+    state: link
+  become: true
+
+- name: copiando o arquivo de configuração do zoo.cnf
+  template:
+    src: zoo.cfg.j2
+    dest: "{{ path_zoo }}/conf/zoo.cfg"
+    owner: "{{ user_zoo }}"
+    backup: true
+  become: true
+
+- name: copiando o arquivo de service do zookeeper
+  template:
+    src: zookeeper.service.j2
+    dest: /etc/systemd/system/zookeeper.service
+  notify:
+    - inicia zookeeper
+  become: true
