@@ -1,8 +1,9 @@
 ansible-role-zookeeper
 =========
 
-Role de instalação do zookeeper
+[![Build Status](https://travis-ci.org/alvarobacelar/ansible-role-zookeeper.svg?branch=master)](https://travis-ci.org/alvarobacelar/ansible-role-zookeeper)
 
+Role de instalação do zookeeper
 
 Role Variáveis
 --------------
