@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - name: java
+  - name: geerlingguy.java
     become: true
 
 galaxy_info:
