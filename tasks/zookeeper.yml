@@ -15,7 +15,7 @@
     state: link
   become: true
 
-- name: copiando o arquivo de configuração do zoo.cnf
+- name: copiando os arquivos de configuração
   template:
     src: "{{ item.orig }}"
     dest: "{{ item.dest }}"
