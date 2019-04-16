@@ -17,10 +17,15 @@
 
 - name: copiando o arquivo de configuração do zoo.cnf
   template:
-    src: zoo.cfg.j2
-    dest: "{{ path_zoo }}/conf/zoo.cfg"
+    src: "{{ item.orig }}"
+    dest: "{{ item.dest }}"
     owner: "{{ user_zoo }}"
     backup: true
+  with_items:
+    - orig: zoo.cfg.j2
+      dest: "{{ path_zoo }}/conf/zoo.cfg"
+    - orig: jvm.properties.j2
+      dest: "{{ path_zoo }}/conf/jvm.properties"
   become: true
 
 - name: copiando o arquivo de service do zookeeper

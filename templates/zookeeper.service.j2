@@ -9,6 +9,7 @@ Type=forking
 User={{ user_zoo }}
 Restart=on-failure
 Environment=ZOO_LOG_DIR={{ log_dir_zoo }}
+EnvironmentFile=-{{ path_zoo }}/conf/jvm.properties
 ExecStart={{ path_zoo }}/bin/zkServer.sh start {{ path_zoo }}/conf/zoo.cfg
 ExecStop={{ path_zoo }}/bin/zkServer.sh stop {{ path_zoo }}/conf/zoo.cfg
 ExecReload={{ path_zoo }}/bin/zkServer.sh restart {{ path_zoo }}/conf/zoo.cfg

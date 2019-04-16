@@ -9,6 +9,8 @@ sync_limit_zoo: 2
 client_port_zoo: 2181
 data_dir_zoo: /var/lib/zookeeper
 log_dir_zoo: /var/log/zookeeper
+xms_limit: 1g
+xmx_limit: 1g
 
 path_kafka: /etc/kafka
 
