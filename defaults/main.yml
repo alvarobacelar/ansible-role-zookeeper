@@ -1,6 +1,6 @@
 ---
 
-# vars padroes zookeeper
+# vars defaults zookeeper
 path_zoo: /etc/zookeeper
 user_zoo: zoouser
 version_zoo: 3.4.14
@@ -9,10 +9,36 @@ sync_limit_zoo: 2
 client_port_zoo: 2181
 data_dir_zoo: /var/lib/zookeeper
 log_dir_zoo: /var/log/zookeeper
-xms_limit: 1g
-xmx_limit: 1g
+open_file_limit: 500000
 
-path_kafka: /etc/kafka
+# links for download to zookeeper
+_zookeeper_link: http://ftp.unicamp.br/pub/apache/zookeeper/zookeeper-{{ version_zoo }}/zookeeper-{{ version_zoo }}.tar.gz
+zookeeper_open_file_limit: "{{open_file_limit}}"
+#zookeeper_kafka_opts_buildout: "{{ zookeeper_jolokia_java_arg + ' ' + zookeeper_jaas_java_arg if zookeeper_jolokia_java_arg != '' or zookeeper_jaas_java_arg != '' else '' }}"
 
-# links para download kafka e zookeeper
-_zookeeper_link: http://ftp.unicamp.br/pub/apache/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz
+zookeeper_service_environment_overrides:
+  JVMFLAGS: "-Xmx1g"
+
+zookeeper_service_overrides:
+  LimitNOFILE: "{{zookeeper_open_file_limit}}"
+
+zookeeper:
+  user: zookeeper
+  group: zookeeper
+  config_file: "{{ path_zoo }}/zoo.cfg"
+  log_path: "{{ log_dir_zoo }}"
+  max_log_files: 10
+  log_file_size: 100MB
+  service_name: zookeeper
+  systemd_file: /usr/lib/systemd/system/zookeeper.service
+  systemd_override: /etc/systemd/system/zookeeper.service.d
+  properties:
+    maxClientCnxns: 0
+    initLimit: 5
+    syncLimit: 2
+    autopurge.snapRetainCount: 10
+    autopurge.purgeInterval: 1
+    dataDir: "{{ data_dir_zoo }}"
+  systemd:
+    enabled: yes
+    state: started
