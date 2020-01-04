@@ -1,13 +1,17 @@
 ---
 
-- name: criando o usuário zoouser
-  user:
-    name: "{{ user_zoo }}"
-    shell: /sbin/nologin
-    comment: "Zookeeper user"
-  become: true
+- name: Create Zookeeper Group
+  group:
+    name: "{{zookeeper.group}}"
 
-- name: garantindo que os diretorios do zookeeper estejam todos criados
+- name: Create Zookeeper User
+  user:
+    name: "{{zookeeper.user}}"
+    comment: "Zookeeper User"
+    system: yes
+    group: "{{zookeeper.group}}"
+
+- name: Ensure datadir and logdir will create
   file:
     path: "{{ item }}"
     owner: "{{ user_zoo }}"
@@ -16,4 +20,3 @@
   with_items:
     - "{{ data_dir_zoo }}"
     - "{{ log_dir_zoo }}"
-  become: true

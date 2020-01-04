@@ -1,37 +1,61 @@
 ---
 
-- name: baixando o zookeper no servidor
+- name: Downloading zookeeper tar to server
   unarchive:
     src: "{{ _zookeeper_link }}"
     dest: "/opt/"
-    owner: "{{ user_zoo }}"
+    owner: "{{ zookeeper.user }}"
+    group: "{{ zookeeper.group }}"
     remote_src: true
-  become: true
 
-- name: criando um link simbolico no path {{ path_zoo }}
+- name: Creating link simbolic to path {{ path_zoo }}
   file:
     src: "/opt/zookeeper-{{ version_zoo }}"
     dest: "{{ path_zoo }}"
     state: link
-  become: true
 
-- name: copiando os arquivos de configuração
+- name: Creating Service Override Directory
+  file:
+    path: "{{ zookeeper.systemd_override }}"
+    owner: "{{ zookeeper.user }}"
+    group: "{{ zookeeper.group }}"
+    state: directory
+    mode: 0640
+
+- name: Coping files configs
   template:
     src: "{{ item.orig }}"
     dest: "{{ item.dest }}"
-    owner: "{{ user_zoo }}"
-    backup: true
+    owner: "{{ zookeeper.user }}"
+    group: "{{ zookeeper.group }}"
+    mode: '764'
+    recurse: true
   with_items:
     - orig: zoo.cfg.j2
-      dest: "{{ path_zoo }}/conf/zoo.cfg"
-    - orig: jvm.properties.j2
-      dest: "{{ path_zoo }}/conf/jvm.properties"
-  become: true
+      dest: "{{ path_zoo }}/zoo.cfg"
+    - orig: override.conf.j2
+      dest: "{{ zookeeper.systemd_override }}/override.conf"
+  notify:
+    - reload systemd
+    - restart zookeeper
 
-- name: copiando o arquivo de service do zookeeper
+- name: Creating Zookeeper myid File
+  template:
+    src: myid.j2
+    dest: "{{ zookeeper.properties.dataDir }}/myid"
+    mode: 0555
+    owner: "{{ zookeeper.user }}"
+    group: "{{ zookeeper.group }}"
+
+- name: Coping file service the zookeeper
   template:
     src: zookeeper.service.j2
-    dest: /etc/systemd/system/zookeeper.service
-  notify:
-    - inicia zookeeper
-  become: true
+    dest: "{{ zookeeper.systemd_file }}"
+
+- meta: flush_handlers
+
+- name: Starting Zookeeper Service
+  systemd:
+    name: "{{ zookeeper.service_name }}"
+    enabled: "{{ zookeeper.systemd.enabled }}"
+    state: "{{ zookeeper.systemd.state }}"

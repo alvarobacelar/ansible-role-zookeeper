@@ -1,8 +1,8 @@
 ---
 
-- name: inicia zookeeper
+- name: reload systemd
+  command: systemctl daemon-reload
+- name: restart zookeeper
   systemd:
-    name: zookeeper
-    state: started
-    daemon_reload: true
-  become: true
+    name: "{{zookeeper.service_name}}"
+    state: restarted
