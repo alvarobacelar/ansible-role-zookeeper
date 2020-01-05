@@ -29,7 +29,6 @@
     owner: "{{ zookeeper.user }}"
     group: "{{ zookeeper.group }}"
     mode: '764'
-    recurse: true
   with_items:
     - orig: zoo.cfg.j2
       dest: "{{ path_zoo }}/zoo.cfg"
