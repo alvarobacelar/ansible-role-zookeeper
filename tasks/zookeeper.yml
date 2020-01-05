@@ -50,11 +50,7 @@
   template:
     src: zookeeper.service.j2
     dest: "{{ zookeeper.systemd_file }}"
+  notify:
+    - start zookeeper
 
 - meta: flush_handlers
-
-- name: Starting Zookeeper Service
-  systemd:
-    name: "{{ zookeeper.service_name }}"
-    enabled: "{{ zookeeper.systemd.enabled }}"
-    state: "{{ zookeeper.systemd.state }}"
