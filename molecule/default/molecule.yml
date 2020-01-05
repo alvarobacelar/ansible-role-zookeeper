@@ -18,10 +18,14 @@ platforms:
 provisioner:
   name: ansible
   inventory:
-    hosts:
+    group_vars:
       zookeeper:
-        localhost:
-        127.0.0.1:
+        zookeeper_id: 1
+    hosts:
+      all:
+        zookeeper:
+          localhost:
+          127.0.0.1:
   lint:
     name: ansible-lint
   playbooks:
