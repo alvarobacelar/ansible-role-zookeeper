@@ -22,10 +22,8 @@ provisioner:
       zookeeper:
         zookeeper_id: 1
     hosts:
-      all:
-        zookeeper:
-          localhost:
-          127.0.0.1:
+      zookeeper:
+        localhost:
   lint:
     name: ansible-lint
   playbooks:
