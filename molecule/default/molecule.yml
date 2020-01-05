@@ -17,6 +17,9 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
+  inventory:
+    links:
+      hosts: ../../../inventory/hosts
   lint:
     name: ansible-lint
   playbooks:
