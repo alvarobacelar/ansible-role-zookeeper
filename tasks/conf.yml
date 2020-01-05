@@ -14,7 +14,8 @@
 - name: Ensure datadir and logdir will create
   file:
     path: "{{ item }}"
-    owner: "{{ user_zoo }}"
+    owner: "{{ zookeeper.user }}"
+    group: "{{ zookeeper.group }}"
     mode: 0755
     state: directory
   with_items:
