@@ -3,45 +3,36 @@ ansible-role-zookeeper
 
 [![Build Status](https://travis-ci.org/alvarobacelar/ansible-role-zookeeper.svg?branch=master)](https://travis-ci.org/alvarobacelar/ansible-role-zookeeper)
 
-Role de instalação do zookeeper
+Role of installation of ZooKeeper
 
-Role Variáveis
+Role Variables
 --------------
 
-Essa role possui algumas variáveis padrões que podem ser alterados de acordo com o seu ambiente.
-```yml
-path_zoo: /etc/zookeeper 
-user_zoo: zoouser
-version_zoo: 3.4.14
-init_limit_zoo: 5
-sync_limit_zoo: 2
-client_port_zoo: 2181
-data_dir_zoo: /var/lib/zookeeper
-log_dir_zoo: /var/log/zookeeper
-```
+This role have some defaults variables on file _main.yml_ that is available on the defaults directory.
 
 Dependencias
 ------------
 
-Para a instalação do zookeeper, é preciso ter o java instalado. Por conta disso essa role possui uma dependência de uma outra role que é a instalação do kafka, antes de executar essa role você deve baixar a role que no qual esta depende com o seguinte comando: 
+This role depends of another role for installation java of owner geerlingguy.java. For download this role execute the command following: 
 ```shell
-# ansible-galaxy install -r requeriments.yml
+# ansible-galaxy install geerlingguy.java
 ```
 
-Examplo Playbook
+Exemple of Playbook
 ----------------
 
-Abaixo um exemplo do arquvivo de playbook para a instalação:
+The host group for install the ZooKeeper, in your inventory, must be exactly follow on the example of playbook bellow:
 
-    - hosts: servers
+    - hosts: zookeeper
+      become: true
       roles:
-         - zookeeper
+         - alvarobacelar.zookeeper
 
 License
 -------
 
 BSD
 
-Informação do Autor
+About Author
 ------------------
-Alvaro Bacelar - Especialista em Infraestrutura, entusiasta DevOps e Infra As Code
+Alvaro Bacelar - Infraestructure especialist, enthusiastic DevOps and Infra As Code
