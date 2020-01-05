@@ -14,7 +14,6 @@ open_file_limit: 500000
 # links for download to zookeeper
 _zookeeper_link: http://ftp.unicamp.br/pub/apache/zookeeper/zookeeper-{{ version_zoo }}/zookeeper-{{ version_zoo }}.tar.gz
 zookeeper_open_file_limit: "{{open_file_limit}}"
-#zookeeper_kafka_opts_buildout: "{{ zookeeper_jolokia_java_arg + ' ' + zookeeper_jaas_java_arg if zookeeper_jolokia_java_arg != '' or zookeeper_jaas_java_arg != '' else '' }}"
 
 zookeeper_service_environment_overrides:
   JVMFLAGS: "-Xmx1g"
@@ -40,5 +39,5 @@ zookeeper:
     autopurge.purgeInterval: 1
     dataDir: "{{ data_dir_zoo }}"
   systemd:
-    enabled: yes
+    enabled: true
     state: started

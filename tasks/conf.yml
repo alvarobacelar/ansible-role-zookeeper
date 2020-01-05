@@ -8,7 +8,7 @@
   user:
     name: "{{zookeeper.user}}"
     comment: "Zookeeper User"
-    system: yes
+    system: true
     group: "{{zookeeper.group}}"
 
 - name: Ensure datadir and logdir will create
