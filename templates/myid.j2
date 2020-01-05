@@ -2,3 +2,4 @@
 {{ groups.zookeeper.index(inventory_hostname) + 1)}}
 {% else %}
 {{ zookeeper_id }}
+{% endif %}
