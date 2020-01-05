@@ -18,8 +18,10 @@ platforms:
 provisioner:
   name: ansible
   inventory:
-    links:
-      hosts: ../../../inventory/hosts
+    hosts:
+      all:
+        extra_host:
+          zookeeper: localhost
   lint:
     name: ansible-lint
   playbooks:
