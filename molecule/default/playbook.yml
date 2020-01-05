@@ -4,4 +4,4 @@
   become: true
 
   roles:
-    - role: ansible-role-zookeeper
+    - role: alvarobacelar.zookeeper
