@@ -19,9 +19,9 @@ provisioner:
   name: ansible
   inventory:
     hosts:
-      all:
-        extra_host:
-          zookeeper: localhost
+      zookeeper:
+        localhost:
+        127.0.0.1:
   lint:
     name: ansible-lint
   playbooks:
