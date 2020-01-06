@@ -37,6 +37,7 @@ zookeeper:
     maxClientCnxns: 0
     initLimit: 5
     syncLimit: 2
+    clientPort: "{{ client_port_zoo }}"
     autopurge.snapRetainCount: 10
     autopurge.purgeInterval: 1
     dataDir: "{{ data_dir_zoo }}"
