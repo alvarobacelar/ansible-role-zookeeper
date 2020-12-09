@@ -1,9 +1,9 @@
 ---
-- name: zookeeper
-  hosts: all
+- name: zookeeper install
+  hosts: zookeeper
   become: true
-  vars:
-    zookeeper_id: 1
+  # vars:
+  #   zookeeper_id: 1
 
   roles:
-    - role: alvarobacelar.zookeeper
+    - role: ansible-role-zookeeper

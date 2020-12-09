@@ -10,7 +10,7 @@
 
 - name: Creating link simbolic to path {{ path_zoo }}
   file:
-    src: "/opt/zookeeper-{{ version_zoo }}"
+    src: "/opt/apache-zookeeper-{{ version_zoo }}-bin"
     dest: "{{ path_zoo }}"
     state: link
 
