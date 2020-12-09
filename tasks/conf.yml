@@ -21,3 +21,6 @@
   with_items:
     - "{{ data_dir_zoo }}"
     - "{{ log_dir_zoo }}"
+
+- name: Engure command unzip available
+  yum: name=unzip state=present

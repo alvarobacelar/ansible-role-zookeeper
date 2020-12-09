@@ -2,22 +2,22 @@
 
 # vars defaults zookeeper
 path_zoo: /etc/zookeeper
-version_zoo: 3.4.14
+version_zoo: 3.5.8
 init_limit_zoo: 5
 sync_limit_zoo: 2
 client_port_zoo: 2181
 data_dir_zoo: /var/lib/zookeeper
 log_dir_zoo: /var/log/zookeeper
 open_file_limit: 500000
-# this variable will be ignored if zookeeper group is bigger than 1
+# this variable will be ignored if zookeeper group is bigger than  1
 zookeeper_id: 1
 
 # links for download to zookeeper
-_zookeeper_link: http://ftp.unicamp.br/pub/apache/zookeeper/zookeeper-{{ version_zoo }}/zookeeper-{{ version_zoo }}.tar.gz
+_zookeeper_link: https://downloads.apache.org/zookeeper/zookeeper-{{ version_zoo }}/apache-zookeeper-{{ version_zoo }}-bin.tar.gz
 zookeeper_open_file_limit: "{{open_file_limit}}"
 
 zookeeper_service_environment_overrides:
-  JVMFLAGS: "-Xmx1g"
+  JVMFLAGS: "-Xmx3g"
   ZOO_LOG_DIR: "{{ log_dir_zoo }}"
 
 zookeeper_service_overrides:
